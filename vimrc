@@ -9,6 +9,7 @@ call vundle#begin()
 Plugin 'gmarik/vundle'
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-rails'
 Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Valloric/YouCompleteMe'
