@@ -7,16 +7,17 @@ call vundle#begin()
 " let Vundle manage Vundle
 " required!
 Plugin 'gmarik/vundle'
+Plugin 'tpope/vim-sensible'
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-rails'
+Plugin 'tpope/vim-surround'
 Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Valloric/YouCompleteMe'
 "Plugin 'davidhalter/jedi-vim'
 Plugin 'marijnh/tern_for_vim'
 Plugin 'msanders/snipmate.vim.git'
-Plugin 'vim-scripts/pep8'
 Plugin 'vim-scripts/TaskList.vim.git'
 Plugin 'fholgado/minibufexpl.vim'
 Plugin 'altercation/vim-colors-solarized'
@@ -24,7 +25,6 @@ Plugin 'lsdr/monokai'
 Plugin 'tomasr/molokai'
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'pangloss/vim-javascript'
-Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 
@@ -32,8 +32,10 @@ Plugin 'plasticboy/vim-markdown'
 call vundle#end()
 
 filetype plugin indent on
-
-" The rest of your config follows here
+syntax on                           " syntax highlighing
+filetype on                          " try to detect filetypes
+set number
+set nowrap
 
 " Change mapleader to comma
 let mapleader=","
@@ -58,15 +60,18 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 
+autocmd FileType ruby setlocal shiftwidth=2 tabstop=2
+autocmd FileType less setlocal shiftwidth=2 tabstop=2
+autocmd FileType scss setlocal shiftwidth=2 tabstop=2
+autocmd FileType css setlocal shiftwidth=2 tabstop=2
+autocmd FileType html setlocal shiftwidth=2 tabstop=2
+autocmd FileType sql setlocal shiftwidth=2 tabstop=2
+
 " Task list settings
 map <leader>td <Plug>TaskList
 
-" Syntax highlighting and validation
-syntax on                           " syntax highlighing
-filetype on                          " try to detect filetypes
-filetype plugin indent on    " enable loading indent file for filetype
-set number
-set nowrap
+" Markdown settings
+let g:vim_markdown_folding_disabled=1
 
 " Syntastic settings
 set statusline+=%#warningmsg#
@@ -78,6 +83,14 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:ycm_global_ycm_extra_conf = '/home/eric/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm'
+
+" Delete trailing whitespace
+autocmd BufWritePre * :%s/\s\+$//e
+
+" Toggle paste mode
+map <leader>p <Esc>:set paste<CR>
+map <leader>[ <Esc>:set nopaste<CR>
+
 
 " Window splits shortcuts
 map <c-j> <c-w>j
