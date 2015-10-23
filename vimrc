@@ -85,7 +85,7 @@ let g:syntastic_check_on_wq = 0
 let g:ycm_global_ycm_extra_conf = '/home/eric/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm'
 
 " Delete trailing whitespace
-autocmd BufWritePre * :%s/\s\+$//e
+"autocmd BufWritePre * :%s/\s\+$//e
 
 " Toggle paste mode
 map <leader>p <Esc>:set paste<CR>
