@@ -58,20 +58,30 @@ set laststatus=2
 " NERDTree shortcut
 map <F2> :NERDTreeToggle<CR>
 
-"Use spaces instead of tabs
-set tabstop=4
-set shiftwidth=4
-set expandtab
+au BufNewFile,BufRead *.py set tabstop=4 softtabstop=4 shiftwidth=4 textwidth=80 expandtab autoindent fileformat=unix
 
-autocmd FileType ruby setlocal shiftwidth=2 tabstop=2
-autocmd FileType less setlocal shiftwidth=2 tabstop=2
-autocmd FileType scss setlocal shiftwidth=2 tabstop=2
-autocmd FileType css setlocal shiftwidth=2 tabstop=2
-autocmd FileType html setlocal shiftwidth=2 tabstop=2
-autocmd FileType sql setlocal shiftwidth=2 tabstop=2
+au BufNewFile,BufRead *.js, *.html, *.css, *.md, *.rst set tabstop=2 softtabstop=2 shiftwidth=2
+
+"python virtualenv support for YCM
+py3 << EOF
+import os
+import sys
+if 'VIRTUAL_ENV' in os.environ:
+    project_base_dir = os.environ['VIRTUAL_ENV']
+    activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+    execfile(activate_this, dict(__file__=activate_this))
+EOF
 
 " Task list settings
 map <leader>td <Plug>TaskList
+
+" Folding
+set foldmethod=indent
+set foldlevel=99
+nnoremap <space> za
+
+" Show docstrings for folded code
+let g:SimpylFold_docstring_preview=1
 
 " Markdown settings
 let g:vim_markdown_folding_disabled=1
@@ -85,7 +95,13 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-let g:ycm_global_ycm_extra_conf = '/home/eric/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm'
+
+"let g:ycm_global_ycm_extra_conf = '/home/eric/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm'
+let g:ycm_python_binary_path = 'python'
+
+" ReactJS/JSX settings
+let g:jsx_ext_required = 0 " allow JSX in normal JS files
+let g:syntastic_javascript_checkers = ['eslint']
 
 " Delete trailing whitespace
 "autocmd BufWritePre * :%s/\s\+$//e
