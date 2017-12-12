@@ -2,14 +2,18 @@ set encoding=utf-8
 call plug#begin('~/.local/share/nvim/plugged')
 
 
+"Plug 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
+"Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
+"Plugin 'marijnh/tern_for_vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'sbdchd/neoformat'
 Plug 'mxw/vim-jsx'
+"Plug 'fholgado/minibufexpl.vim'
 Plug 'altercation/vim-colors-solarized'
 Plug 'lsdr/monokai'
 Plug 'tomasr/molokai'
@@ -100,6 +104,14 @@ map <c-h> <c-w>h
 let g:airline#extensions#tabline#enabled = 2
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline_powerline_fonts = 1
+" let g:airline#extensions#tabline#left_sep = ' '
+" let g:airline#extensions#tabline#left_alt_sep = '|'
+" let g:airline#extensions#tabline#right_sep = ' '
+" let g:airline#extensions#tabline#right_alt_sep = '|'
+" let g:airline_left_sep = ' '
+" let g:airline_left_alt_sep = '|'
+" let g:airline_right_sep = ' '
+" let g:airline_right_alt_sep = '|'
 let g:airline_theme = 'jellybeans'
 
 " Use deoplete for autocompletion
