@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-  export PATH=$HOME/.local/bin:$HOME/bin:/usr/local/bin:$PATH
+  export PATH=$HOME/.local/bin:$HOME/bin::$PATH
 
 # Path to your oh-my-zsh installation.
   export ZSH=/home/eric/.oh-my-zsh
@@ -92,6 +92,10 @@ source $ZSH/oh-my-zsh.sh
    export EDITOR='nvim'
  fi
 
+# Source exports
+ if [[ -a $HOME/.exports ]]; then
+  source $HOME/.exports
+ fi
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
@@ -106,3 +110,6 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+#
+# direnv config
+  eval "$(direnv hook zsh)"
