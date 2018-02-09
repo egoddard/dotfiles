@@ -2,18 +2,16 @@ set encoding=utf-8
 call plug#begin('~/.local/share/nvim/plugged')
 
 
-"Plug 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'w0rp/ale'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
-"Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
-"Plugin 'marijnh/tern_for_vim'
+Plug 'tpope/vim-rhubarb'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'sbdchd/neoformat'
 Plug 'mxw/vim-jsx'
-"Plug 'fholgado/minibufexpl.vim'
 Plug 'altercation/vim-colors-solarized'
 Plug 'lsdr/monokai'
 Plug 'tomasr/molokai'
@@ -21,14 +19,14 @@ Plug 'jelera/vim-javascript-syntax'
 Plug 'pangloss/vim-javascript'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
-Plug 'tmhedberg/SimpylFold'
+Plug 'airblade/vim-gitgutter'
 Plug 'elzr/vim-json'
 Plug 'editorconfig/editorconfig-vim'
 
 call plug#end()
 
-let g:python_host_prog = '/home/eric/.pyenv/versions/py2neovim/bin/python'
-let g:python3_host_prog = '/home/eric/.pyenv/versions/py3neovim/bin/python'
+let g:python_host_prog = '/home/eric/.virtualenvs/py2neovim/bin/python'
+let g:python3_host_prog = '/home/eric/.virtualenvs/py3neovim/bin/python'
 
 let mapleader="\<SPACE>"
 set showmatch           " Show matching brackets.
@@ -63,10 +61,9 @@ nnoremap ; :
 " Use Q to execute default register
 nnoremap Q @q
 
-" Use <C-L> to clear the highlighting of :set hlsearch.
-if maparg('<C-L>', 'n') ==# ''
-  nnoremap <silent> <C-L> :nohlsearch<CR><C-L>
-endif
+
+" Clear highlighting
+nnoremap <silent> <leader>c :nohlsearch<CR>
 
 " Search and Replace
 nmap <Leader>s :%s//g<Left><Left>
@@ -101,23 +98,45 @@ map <c-k> <c-w>k
 map <c-l> <c-w>l
 map <c-h> <c-w>h
 
-let g:airline#extensions#tabline#enabled = 2
+" buffer previous/next shortcuts
+nnoremap <silent> <leader>q :bp<CR>
+nnoremap <silent> <leader>e :bn<CR>
+
+let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+let g:airline#extensions#ale#enabled = 1
 let g:airline_powerline_fonts = 1
-" let g:airline#extensions#tabline#left_sep = ' '
-" let g:airline#extensions#tabline#left_alt_sep = '|'
-" let g:airline#extensions#tabline#right_sep = ' '
-" let g:airline#extensions#tabline#right_alt_sep = '|'
-" let g:airline_left_sep = ' '
-" let g:airline_left_alt_sep = '|'
-" let g:airline_right_sep = ' '
-" let g:airline_right_alt_sep = '|'
 let g:airline_theme = 'jellybeans'
 
 " Use deoplete for autocompletion
 let g:deoplete#enable_at_startup = 1
 
 let g:EditorConfig_exclude_patterns = ['fugitive://.*','scp://.*']
+
+" Refresh file on focus
+set autoread
+au FocusGained * :checktime
+
+" ALE config
+let g:ale_python_flake8_executable = 'python'
+let g:ale_python_flake8_options = '-m flake8'
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_open_list = 0
+
+let g:ale_linters = {
+\   'python': ['flake8'],
+\   'javascript': ['eslint']
+\}
+
+let g:ale_fixers = {
+\   'python': ['yapf'],
+\   'javascript': ['prettier'],
+\   'css': ['prettier']
+\}
+
+nmap <silent> <leader>k <Plug>(ale_previous_wrap)
+nmap <silent> <leader>j <Plug>(ale_next_wrap)
 
 set t_Co=256
 set background=dark
