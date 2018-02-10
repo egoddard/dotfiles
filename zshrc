@@ -71,7 +71,7 @@ plugins=(
   per-directory-history
   pip
   python
-  pyenv
+  virtualenvwrapper
   tmux
   yarn
 )
