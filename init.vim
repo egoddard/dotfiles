@@ -10,6 +10,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'zchee/deoplete-jedi',
 Plug 'sbdchd/neoformat'
 Plug 'mxw/vim-jsx'
 Plug 'altercation/vim-colors-solarized'
@@ -81,6 +82,9 @@ nnoremap <Leader>o :CtrlP<CR>
 nnoremap <Leader>b :CtrlPBuffer<CR>
 " Open most recently used files
 nnoremap <Leader>f :CtrlPMRUFiles<CR>
+
+" Use Esc to exit insert mode when in terminal
+:tnoremap <Esc> <C-\><C-n>
 
 " CtrlP Custom ignore
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
