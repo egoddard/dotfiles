@@ -71,8 +71,8 @@ plugins=(
   per-directory-history
   pip
   python
-  pyenv
   tmux
+  virtualenvwrapper
   yarn
 )
 
@@ -96,6 +96,10 @@ source $ZSH/oh-my-zsh.sh
  if [[ -a $HOME/.exports ]]; then
   source $HOME/.exports
  fi
+
+ if [[ -a $HOME/.strat_functions ]]; then
+  source $HOME/.strat_functions
+ fi
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
@@ -110,6 +114,10 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-#
+
+#Hub completion
+fpath=(~/.zsh/completions $fpath)
+autoload -U compinit && compinit
+
 # direnv config
   eval "$(direnv hook zsh)"
