@@ -23,6 +23,8 @@ Plug 'plasticboy/vim-markdown'
 Plug 'airblade/vim-gitgutter'
 Plug 'elzr/vim-json'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'drewtempelmeyer/palenight.vim'
+Plug 'joshdick/onedark.vim'
 
 call plug#end()
 
@@ -115,6 +117,13 @@ let g:airline_theme = 'jellybeans'
 
 " Use deoplete for autocompletion
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#sources#jedi#show_docstring = 1
+
+" Close the completion preview window after a selection is made
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+
+"Remap completion to tab if preview window is open
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 let g:EditorConfig_exclude_patterns = ['fugitive://.*','scp://.*']
 
@@ -142,6 +151,10 @@ let g:ale_fixers = {
 nmap <silent> <leader>k <Plug>(ale_previous_wrap)
 nmap <silent> <leader>j <Plug>(ale_next_wrap)
 
-set t_Co=256
+if (has("termguicolors"))
+    set termguicolors
+endif
+
+let g:onedark_terminal_italics=1
 set background=dark
-colorscheme molokai
+colorscheme onedark
