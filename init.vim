@@ -127,7 +127,7 @@ inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 let g:EditorConfig_exclude_patterns = ['fugitive://.*','scp://.*']
 
-let g:markdown_syntax_conceal = 0
+let g:markdown_folding_disabled = 1
 
 " Refresh file on focus
 set autoread
