@@ -18,6 +18,8 @@ Plug 'lsdr/monokai'
 Plug 'tomasr/molokai'
 Plug 'jelera/vim-javascript-syntax'
 Plug 'pangloss/vim-javascript'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'maxmellon/vim-jsx-pretty'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'airblade/vim-gitgutter'
@@ -31,13 +33,13 @@ call plug#end()
 let g:python_host_prog = '/home/eric/.virtualenvs/py2neovim/bin/python'
 let g:python3_host_prog = '/home/eric/.virtualenvs/py3neovim/bin/python'
 
+filetype plugin indent on
+
 let mapleader="\<SPACE>"
 set showmatch           " Show matching brackets.
 set number              " Show the line numbers on the left side.
 set formatoptions+=o    " Continue comment marker in new lines.
 set expandtab           " Insert spaces when TAB is pressed.
-set tabstop=4           " Render TABs using this many spaces.
-set shiftwidth=4        " Indentation amount for < and > commands.
 
 set nojoinspaces        " Prevents inserting two spaces after punctuation on a join (J)
 
@@ -97,7 +99,6 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\v\.(exe|so|dll|pyc)$',
   \ }
 
-
 " Window splits shortcuts
 map <c-j> <c-w>j
 map <c-k> <c-w>k
@@ -128,6 +129,11 @@ inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 let g:EditorConfig_exclude_patterns = ['fugitive://.*','scp://.*']
 
 let g:markdown_folding_disabled = 1
+
+" Keep undo history across sessions by storing in file.
+silent !mkdir ~/.config/nvim/backups > /dev/null 2>&1
+set undodir=~/.config/nvim/backups
+set undofile
 
 " Refresh file on focus
 set autoread
