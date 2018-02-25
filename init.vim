@@ -27,6 +27,7 @@ Plug 'elzr/vim-json'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'joshdick/onedark.vim'
+Plug 'NLKNguyen/papercolor-theme'
 
 call plug#end()
 
@@ -114,7 +115,7 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline#extensions#ale#enabled = 1
 let g:airline_powerline_fonts = 1
-let g:airline_theme = 'jellybeans'
+let g:airline_theme = 'papercolor'
 
 " Use deoplete for autocompletion
 let g:deoplete#enable_at_startup = 1
@@ -164,5 +165,5 @@ if (has("termguicolors"))
 endif
 
 let g:onedark_terminal_italics=1
-set background=dark
-colorscheme onedark
+set background=light
+colorscheme PaperColor
