@@ -28,6 +28,7 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'joshdick/onedark.vim'
 Plug 'NLKNguyen/papercolor-theme'
+Plug 'rakr/vim-one'
 
 call plug#end()
 
@@ -96,7 +97,7 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'dir':  '\v[\/]\.(git|hg|svn)|node_modules$',
   \ 'file': '\v\.(exe|so|dll|pyc)$',
   \ }
 
@@ -115,7 +116,7 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline#extensions#ale#enabled = 1
 let g:airline_powerline_fonts = 1
-let g:airline_theme = 'papercolor'
+let g:airline_theme = 'one'
 
 " Use deoplete for autocompletion
 let g:deoplete#enable_at_startup = 1
@@ -165,5 +166,5 @@ if (has("termguicolors"))
 endif
 
 let g:onedark_terminal_italics=1
+colorscheme one
 set background=light
-colorscheme PaperColor
