@@ -121,3 +121,8 @@ autoload -U compinit && compinit
 
 # direnv config
   eval "$(direnv hook zsh)"
+
+# Fix weird ls colors
+if [[ -a $HOME/dotfiles/dircolors ]]; then
+  eval "$(dircolors $HOME/dotfiles/dircolors)"
+fi
