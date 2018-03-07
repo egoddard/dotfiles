@@ -24,6 +24,7 @@ Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'airblade/vim-gitgutter'
 Plug 'elzr/vim-json'
+Plug 'nathanaelkane/vim-indent-guides'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'joshdick/onedark.vim'
@@ -167,4 +168,4 @@ endif
 
 let g:onedark_terminal_italics=1
 colorscheme one
-set background=light
+set background=dark
