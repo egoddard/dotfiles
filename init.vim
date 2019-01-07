@@ -30,11 +30,13 @@ Plug 'drewtempelmeyer/palenight.vim'
 Plug 'joshdick/onedark.vim'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'rakr/vim-one'
+Plug 'lifepillar/pgsql.vim'
+Plug 'ambv/black'
 
 call plug#end()
 
-let g:python_host_prog = '/home/eric/.virtualenvs/py2neovim/bin/python'
-let g:python3_host_prog = '/home/eric/.virtualenvs/py3neovim/bin/python'
+"let g:python_host_prog = '/home/eric/.virtualenvs/py2neovim/bin/python'
+"let g:python3_host_prog = '/home/eric/.virtualenvs/py3neovim/bin/python'
 
 filetype plugin indent on
 
@@ -98,7 +100,7 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)|node_modules$',
+  \ 'dir':  '\v[\/]\.(git|hg|svn)|node_modules|dist|*.egg-info$',
   \ 'file': '\v\.(exe|so|dll|pyc)$',
   \ }
 
@@ -154,10 +156,16 @@ let g:ale_linters = {
 \}
 
 let g:ale_fixers = {
-\   'python': ['yapf'],
+\   'python': ['black'],
 \   'javascript': ['prettier'],
 \   'css': ['prettier']
 \}
+
+let g:sql_type_default = 'pgsql'
+autocmd FileType sql setlocal shiftwidth=2 tabstop=2
+
+" Format python files on save with Black
+autocmd BufWritePre *.py execute ':Black'
 
 nmap <silent> <leader>k <Plug>(ale_previous_wrap)
 nmap <silent> <leader>j <Plug>(ale_next_wrap)
