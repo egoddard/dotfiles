@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+SESSION="/vscode/`basename "$PWD"`"
+tmux attach-session -d -t $SESSION || tmux new-session -s $SESSION
