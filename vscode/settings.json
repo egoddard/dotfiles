@@ -1,0 +1,50 @@
+{
+  "telemetry.enableTelemetry": false,
+  "telemetry.enableCrashReporter": false,
+  "workbench.colorTheme": "Cobalt Next",
+  "workbench.iconTheme": "vscode-icons",
+  "editor.fontLigatures": true,
+  "terminal.integrated.rendererType": "canvas",
+  "terminal.integrated.shell.linux": "/home/eric/dotfiles/code-shell",
+  "terminal.integrated.fontFamily": "'Fira Code'",
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/venv*": true
+  },
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/venv*": true
+  },
+  "markdown.extension.toc.githubCompatibility": true,
+  "editor.formatOnSaveTimeout": 10000,
+  "editor.renderWhitespace": "boundary",
+  "editor.smoothScrolling": true,
+  "editor.tabCompletion": "on",
+  "editor.wordSeparators": "`~!@#$%^&*()-=+[{]}\\|;:'\",.<>/?_",
+  "git.autofetch": true,
+  "extensions.ignoreRecommendations": false,
+  "window.titleBarStyle": "custom",
+  "markdown.extension.print.imgToBase64": true,
+  "markdown.extension.showExplorer": true,
+  "[markdown]": {
+    "editor.renderWhitespace": "all",
+    "editor.wordWrap": "off",
+    "editor.quickSuggestions": false,
+    "editor.formatOnSave": true
+  },
+  "vsicons.dontShowNewVersionMessage": true,
+  "todo-tree.defaultHighlight": {},
+  "gitlens.blame.ignoreWhitespace": true,
+  "python.formatting.provider": "black",
+  "python.formatting.blackPath": "~/.local/bin/black",
+  "[python]": {
+    "editor.formatOnPaste": false,
+    "editor.formatOnSave": true
+  },
+  "editor.fontFamily": "'Fira Code'"
+}
