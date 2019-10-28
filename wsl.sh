@@ -44,7 +44,9 @@ sudo apt install -y \
   curl \
   gnupg2 \
   software-properties-common \
-  fontconfig
+  fontconfig \
+  libsnappy1v5 \
+  libsnappy-dev
 
 # Add neovim ppa for a recent version
 sudo add-apt-repository -y ppa:neovim-ppa/stable
@@ -131,3 +133,7 @@ pip install docker-compose pipenv
 
 # Enable pipenv completion
 echo 'eval "$(pipenv --completion)"' >> $HOME/.bashrc && source $HOME/.bashrc
+
+# Install tfenv
+git clone https://github.com/tfutils/tfenv.git $HOME/.tfenv
+echo 'export PATH="$HOME/.tfenv/bin:$PATH"' >> ~/.bashrc
