@@ -79,8 +79,24 @@ fc-cache -vf $HOME/.local/share/fonts
 # Install pyenv
 git clone https://github.com/pyenv/pyenv.git $HOME/.pyenv
 echo 'export PYENV_ROOT="$HOME/.pyenv"' >> $HOME/.bashrc
-echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> $HOME/.bashrc
 echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> $HOME/.bashrc
+
+# Install tfenv
+git clone https://github.com/tfutils/tfenv.git $HOME/.tfenv
+
+# Create $HOME/.local/bin and update paths
+mkdir -p $HOME/.local/bin
+echo 'export PATH="$HOME/.local/bin:$PYENV_ROOT/bin:$HOME/.tfenv/bin:$PATH"' >> ~/.bashrc
+
+# Install Hashicorp vault
+wget https://releases.hashicorp.com/vault/1.2.3/vault_1.2.3_linux_amd64.zip -O vault.zip
+unzip -d $HOME/.local/bin/ vault.zip
+chmod +x $HOME/.local/bin/vault
+rm vault.zip
+
+# Install AWS Vault
+wget https://github.com/99designs/aws-vault/releases/download/v4.6.4/aws-vault-linux-amd64 -O $HOME/.local/bin/aws-vault
+chmod +x $HOME/.local/bin/aws-vault
 
 
 # Set XDG_CONFIG_HOME env var
@@ -134,6 +150,4 @@ pip install docker-compose pipenv
 # Enable pipenv completion
 echo 'eval "$(pipenv --completion)"' >> $HOME/.bashrc && source $HOME/.bashrc
 
-# Install tfenv
-git clone https://github.com/tfutils/tfenv.git $HOME/.tfenv
-echo 'export PATH="$HOME/.tfenv/bin:$PATH"' >> ~/.bashrc
+
