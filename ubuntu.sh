@@ -46,7 +46,8 @@ sudo apt install -y \
   docker.io \
   libpq-dev \
   postgresql-client \
-  neovim
+  neovim \
+  fonts-firacode
 
 # Add neovim ppa for a recent version -- not necessary on ubuntu 19.10
 # sudo add-apt-repository -y ppa:neovim-ppa/stable
