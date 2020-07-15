@@ -71,10 +71,10 @@ ln -s $HOME/dotfiles/tmux.conf.local $HOME/.tmux.conf.local
 
 
 # install custom fonts 
-wget 'https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/FiraCode/Regular/complete/Fura%20Code%20Regular%20Nerd%20Font%20Complete%20Mono.otf'
-mkdir -p $HOME/.local/share/fonts
-mv 'Fura Code Regular Nerd Font Complete Mono.otf' $HOME/.local/share/fonts/
-fc-cache -vf $HOME/.local/share/fonts
+#wget 'https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/FiraCode/Regular/complete/Fura%20Code%20Regular%20Nerd%20Font%20Complete%20Mono.otf'
+#mkdir -p $HOME/.local/share/fonts
+#mv 'Fura Code Regular Nerd Font Complete Mono.otf' $HOME/.local/share/fonts/
+#fc-cache -vf $HOME/.local/share/fonts
 
 
 # Install pyenv
