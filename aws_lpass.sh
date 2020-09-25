@@ -2,7 +2,8 @@
 
 # based on https://paulgalow.com/securing-aws-credentials-macos-lastpass
 #
-readonly lastPassEntry="$1/aws_credentials"
+readonly aws_account=${1:-health}
+readonly lastPassEntry="${aws_account}_aws_credentials"
 readonly accessKeyId=$(lpass show --username "$lastPassEntry")
 readonly secretAccessKey=$(lpass show --password "$lastPassEntry")
 
