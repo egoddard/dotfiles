@@ -1,9 +1,7 @@
 sudo apt install -y tmux fonts-firacode
-cd
+
+cd $HOME
 git clone https://github.com/gpakosz/.tmux.git
-ln -s ~/dotfiles/tmux.conf.local ~/.tmux.conf.local
-
-
-echo "export LPASS_AGENT_TIMEOUT=86400" >> ~/.zshrc
+ln -s $HOME/dotfiles/tmux.conf.local $HOME/.tmux.conf.local
 
 echo "alias gb='git branch --sort=-committerdate'" >> ~/.zshrc
