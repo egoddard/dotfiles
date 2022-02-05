@@ -19,9 +19,9 @@ $helm\
 $nodejs\
 $pulumi\
 $python\
+${custom.terraform-version}\
 $rlang\
 $rust\
-$terraform\
 $memory_usage\
 $aws\
 $env_var\
@@ -42,6 +42,12 @@ $character
 command = 'date +"%a %b %d %Y %l:%M%p"'
 when = "true"
 format = '[\[$symbol($output)\] ](bold blue)'
+
+[custom.terraform-version]
+command = 'cat $PWD/.terraform-version'
+format = '[via $symbol($output) ](bold blue)'
+files = ['.terraform-version']
+symbol = "💠"
 
 [character]
 success_symbol = "[➜](bold green)"
