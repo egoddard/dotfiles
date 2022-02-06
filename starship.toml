@@ -50,9 +50,9 @@ files = ['.terraform-version']
 symbol = "💠"
 
 [character]
-success_symbol = "[➡](bold green)"
-error_symbol = "[➡](bold red)"
-vicmd_symbol = "[𝍌](bold yellow)"
+success_symbol = "[➡](bold fg:#abd9e9)"
+error_symbol = "[➡](bold fg:#ca0020)"
+vicmd_symbol = "[𝍌](bold fg:#ffffbf)"
 
 [directory]
 truncation_length = 3
@@ -61,15 +61,15 @@ truncation_symbol = "../"
 
 [git_status]
 conflicted = "⚔️ "
-ahead = "🏎️ 💨 ×${count} "
-behind = "🐢×${count} "
-diverged = "🔱 🏎️ 💨 ×${ahead_count} 🐢 ×${behind_count} "
+ahead = "⇞:${count} "
+behind = "⇟:${count} "
+diverged = "⼘ ⇞:${ahead_count} ⇟:${behind_count} "
 untracked = ""
-stashed = "📦 "
-modified = "📝×${count} "
-staged = "🗃️ ×${count} "
-renamed = "📛×${count} "
-deleted = "🗑️ ×${count} "
+stashed = ""
+modified = "✎:${count} "
+staged = "️⎆:${count} "
+renamed = "♺:${count} "
+deleted = "⌫:${count} "
 style = "bright-white"
 format = "$all_status$ahead_behind"
 
