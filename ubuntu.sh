@@ -31,19 +31,16 @@ sudo apt install -y \
   jq \
   xclip \
   direnv \
-  fuse \
   tmux \
   apt-transport-https \
   ca-certificates \
   gnupg2 \
-  software-properties-common \
   fontconfig \
   libsnappy1v5 \
   libsnappy-dev \
   docker.io \
   libpq-dev \
   postgresql-client \
-  fonts-firacode \
   zsh
 
 # Add neovim ppa for a recent version -- not necessary on ubuntu 19.10
@@ -63,6 +60,10 @@ touch $HOME/.zshrc
 # Set up oh my bash
 # sh -c "$(wget https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh -O -)"
 
+# Set up oh my zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+
 # Set up oh my tmux
 cd
 git clone https://github.com/gpakosz/.tmux.git
@@ -71,10 +72,10 @@ ln -s $HOME/dotfiles/tmux.conf.local $HOME/.tmux.conf.local
 
 
 # install custom fonts 
-#wget 'https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/FiraCode/Regular/complete/Fura%20Code%20Regular%20Nerd%20Font%20Complete%20Mono.otf'
-#mkdir -p $HOME/.local/share/fonts
-#mv 'Fura Code Regular Nerd Font Complete Mono.otf' $HOME/.local/share/fonts/
-#fc-cache -vf $HOME/.local/share/fonts
+wget 'https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/FiraCode/Regular/complete/Fura%20Code%20Regular%20Nerd%20Font%20Complete%20Mono.otf'
+mkdir -p $HOME/.local/share/fonts
+mv 'Fura Code Regular Nerd Font Complete Mono.otf' $HOME/.local/share/fonts/
+fc-cache -vf $HOME/.local/share/fonts
 
 
 # Install pyenv
@@ -153,6 +154,21 @@ pip install --upgrade pip
 pip install docker-compose pipenv 
 
 
-url --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+# Install rust
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+mkdir $XDG_CONFIG_HOME/alacritty
+git clone https://github.com/catppuccin/alacritty.git $XDG_CONFIG_HOME/alacritty/catppuccin
 
 
+# Install starship.rs terminal
+curl -sS https://starship.rs/install.sh | sh
+echo 'export STARSHIP_CONFIG=$HOME/dotfiles/starship.toml' >> $HOME/.zshrc
+echo 'eval "$(starship init zsh)"' >> $HOME/.zshrc
+
+echo 'export STARSHIP_CONFIG=$HOME/dotfiles/starship.toml' >> $HOME/.bashrc
+echo 'eval "$(starship init bash)"' >> $HOME/.bashrc
+
+# Add direnv hooks
+echo 'eval "$(direnv hook bash)"' >> $HOME/.bashrc
+echo 'eval "$(direnv hook zsh)"' >> $HOME/.zshrc
