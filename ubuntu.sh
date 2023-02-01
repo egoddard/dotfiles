@@ -6,7 +6,7 @@
 	# let g:python3_host_prog='$HOME/.envs/neovim3/Scripts/python'
 	# let g:python_host_prog='$HOME/.envs/neovim/Scripts/python'
 
-PYTHON_VERSION="3.7.5"
+PYTHON_VERSION="3.9.16"
 
 # Install dev libs and tools
 sudo apt install -y \
@@ -17,11 +17,9 @@ sudo apt install -y \
   make \
   libssl-dev \
   zlib1g-dev \
-  libbz2-dev \
   libreadline-dev \
+  libbz2-dev \
   libsqlite3-dev \
-  wget \
-  curl \
   llvm \
   libncurses5-dev \
   xz-utils \
@@ -37,7 +35,6 @@ sudo apt install -y \
   tmux \
   apt-transport-https \
   ca-certificates \
-  curl \
   gnupg2 \
   software-properties-common \
   fontconfig \
@@ -46,19 +43,22 @@ sudo apt install -y \
   docker.io \
   libpq-dev \
   postgresql-client \
-  neovim \
-  fonts-firacode
+  fonts-firacode \
+  zsh
 
 # Add neovim ppa for a recent version -- not necessary on ubuntu 19.10
-# sudo add-apt-repository -y ppa:neovim-ppa/stable
-# sudo apt update && sudo apt install -y neovim
+sudo add-apt-repository -y ppa:neovim-ppa/unstable
+sudo apt update && sudo apt install -y neovim
 
-sudo update-alternatives --install /usr/bin/vi vi /usr/bin/nvim 60
-sudo update-alternatives --config vi
-sudo update-alternatives --install /usr/bin/vim vim /usr/bin/nvim 60
-sudo update-alternatives --config vim
-sudo update-alternatives --install /usr/bin/editor editor /usr/bin/nvim 60
-sudo update-alternatives --config editor
+chsh -s /usr/bin/zsh
+touch $HOME/.zshrc
+
+#sudo update-alternatives --install /usr/bin/vi vi /usr/bin/nvim 60
+#sudo update-alternatives --config vi
+#sudo update-alternatives --install /usr/bin/vim vim /usr/bin/nvim 60
+#sudo update-alternatives --config vim
+#sudo update-alternatives --install /usr/bin/editor editor /usr/bin/nvim 60
+#sudo update-alternatives --config editor
 
 # Set up oh my bash
 # sh -c "$(wget https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh -O -)"
@@ -79,40 +79,65 @@ ln -s $HOME/dotfiles/tmux.conf.local $HOME/.tmux.conf.local
 
 # Install pyenv
 git clone https://github.com/pyenv/pyenv.git $HOME/.pyenv
-echo 'export PYENV_ROOT="$HOME/.pyenv"' >> $HOME/.bashrc
-echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> $HOME/.bashrc
+echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
+echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
+echo 'eval "$(pyenv init -)"' >> ~/.bashrc
+
+echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.profile
+echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.profile
+echo 'eval "$(pyenv init -)"' >> ~/.profile
+
+
+echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshrc
+echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zshrc
+echo 'eval "$(pyenv init -)"' >> ~/.zshrc
+
+echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zprofile
+echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zprofile
+echo 'eval "$(pyenv init -)"' >> ~/.zprofile
 
 # Install tfenv
-git clone https://github.com/tfutils/tfenv.git $HOME/.tfenv
+git clone --depth=1 https://github.com/tfutils/tfenv.git $HOME/.tfenv
 
 
-# Create $HOME/.local/bin and update paths
+# Instal nvm and node + npm
+export NVM_DIR="$HOME/.nvm" && (
+  git clone https://github.com/nvm-sh/nvm.git "$NVM_DIR"
+  cd "$NVM_DIR"
+  ) && \. "$NVM_DIR/nvm.sh"
+  git checkout `git describe --abbrev=0 --tags --match "v[0-9]*" $(git rev-list --tags --max-count=1)`
+
+echo 'export NVM_DIR="$HOME/.nvm"' >> $HOME/.bashrc
+echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $HOME/.bashrc # This loads nvm
+echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"' >> $HOME/.bashrc #This loads nvm bash completion
+
+echo 'export NVM_DIR="$HOME/.nvm"' >> $HOME/.profile
+echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $HOME/.profile # This loads nvm
+echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"' >> $HOME/.profile #This loads nvm bash completion
+
+
+echo 'export NVM_DIR="$HOME/.nvm"' >> $HOME/.zshrc
+echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $HOME/.zshrc # This loads nvm
+echo '[ -s "$NVM_DIR/zsh_completion" ] && \. "$NVM_DIR/zsh_completion"' >> $HOME/.zshrc #This loads nvm zsh completion
+
+echo 'export NVM_DIR="$HOME/.nvm"' >> $HOME/.zprofile
+echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $HOME/.zprofile # This loads nvm
+echo '[ -s "$NVM_DIR/zsh_completion" ] && \. "$NVM_DIR/zsh_completion"' >> $HOME/.zprofile #This loads nvm zsh completion
+
 mkdir -p $HOME/.local/bin
+# Create $HOME/.local/bin and update paths
 echo 'export PATH="$HOME/.local/bin:$PYENV_ROOT/bin:$HOME/.tfenv/bin:$PATH"' >> ~/.bashrc
-
-# Install Hashicorp vault
-wget https://releases.hashicorp.com/vault/1.2.3/vault_1.2.3_linux_amd64.zip -O vault.zip
-unzip -d $HOME/.local/bin/ vault.zip
-chmod +x $HOME/.local/bin/vault
-rm vault.zip
-
-# Install AWS Vault
-wget https://github.com/99designs/aws-vault/releases/download/v4.6.4/aws-vault-linux-amd64 -O $HOME/.local/bin/aws-vault
-chmod +x $HOME/.local/bin/aws-vault
 
 
 # Set XDG_CONFIG_HOME env var
-echo 'export XDG_CONFIG_HOME="$HOME/.config"' >> $HOME/.bashrc && source $HOME/.bashrc
+echo 'export XDG_CONFIG_HOME="$HOME/.config"' >> $HOME/.zshrc
+echo 'export XDG_CONFIG_HOME="$HOME/.config"' >> $HOME/.bashrc
 
-
-# Install vim-plug for Neovim
-curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 
 # Symlink nvim config
 mkdir -p $XDG_CONFIG_HOME/nvim
-ln -s $HOME/dotfiles/init.vim $XDG_CONFIG_HOME/nvim/init.vim
+#ln -s $HOME/dotfiles/init.vim $XDG_CONFIG_HOME/nvim/init.vim
 
 
 # Install $PYTHON_VERSION with pyenv and set it as the global python
@@ -124,11 +149,10 @@ pyenv global $PYTHON_VERSION
 sudo usermod -aG docker $USER
 
 # Install python packages using the global pyenv python
-#pip install --upgrade pip
-#pip install docker-compose pipenv 
-# Enable pipenv completion
-echo 'eval "$(pipenv --completion)"' >> $HOME/.bashrc && source $HOME/.bashrc
+pip install --upgrade pip
+pip install docker-compose pipenv 
 
-# Install nvm
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | NVM_DIR=$HOME/.config/nvm bash
+
+url --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
 
