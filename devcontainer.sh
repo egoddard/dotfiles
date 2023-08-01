@@ -3,6 +3,7 @@ echo "set -o vi" >> ~/.bashrc
 
 echo "alias gb='git branch --sort=-committerdate'" >> ~/.zshrc
 echo "alias gb='git branch --sort=-committerdate'" >> ~/.bashrc
+echo "alias tree='tree --dirsfirst -I __pycache__ -I node_modules'" >> ~/.zshrc
 
 echo "export STARSHIP_CONFIG=$HOME/dotfiles/starship.toml" >> ~/.zshrc
 echo "export STARSHIP_CONFIG=$HOME/dotfiles/starship.toml" >> ~/.bashrc
