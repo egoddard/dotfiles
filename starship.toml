@@ -72,6 +72,9 @@ renamed = "[♺:${count} ](bold fg:#e6f598)"
 deleted = "[⌫:${count} ](bold fg:#d53e4f)"
 format = "$all_status$ahead_behind"
 
+[aws]
+format ='on [$symbol($profile )(\[$duration\] )]($style)'
+
 [time]
 disabled = true
 
@@ -120,10 +123,16 @@ disabled = true
 [php]
 disabled = true
 
+[pulumi]
+disabled = true
+
 [purescript]
 disabled = true
 
 [red]
+disabled = true
+
+[rlang]
 disabled = true
 
 [ruby]
