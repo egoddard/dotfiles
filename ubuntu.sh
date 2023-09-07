@@ -6,7 +6,7 @@
 	# let g:python3_host_prog='$HOME/.envs/neovim3/Scripts/python'
 	# let g:python_host_prog='$HOME/.envs/neovim/Scripts/python'
 
-PYTHON_VERSION="3.9.16"
+PYTHON_VERSION="3.11.5"
 
 # Install dev libs and tools
 sudo apt install -y \
@@ -38,14 +38,9 @@ sudo apt install -y \
   fontconfig \
   libsnappy1v5 \
   libsnappy-dev \
-  docker.io \
   libpq-dev \
   postgresql-client \
   zsh
-
-# Add neovim ppa for a recent version -- not necessary on ubuntu 19.10
-sudo add-apt-repository -y ppa:neovim-ppa/unstable
-sudo apt update && sudo apt install -y neovim
 
 chsh -s /usr/bin/zsh
 touch $HOME/.zshrc
@@ -56,9 +51,6 @@ touch $HOME/.zshrc
 #sudo update-alternatives --config vim
 #sudo update-alternatives --install /usr/bin/editor editor /usr/bin/nvim 60
 #sudo update-alternatives --config editor
-
-# Set up oh my bash
-# sh -c "$(wget https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh -O -)"
 
 # Set up oh my zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -127,13 +119,13 @@ echo '[ -s "$NVM_DIR/zsh_completion" ] && \. "$NVM_DIR/zsh_completion"' >> $HOME
 
 mkdir -p $HOME/.local/bin
 # Create $HOME/.local/bin and update paths
-echo 'export PATH="$HOME/.local/bin:$PYENV_ROOT/bin:$HOME/.tfenv/bin:$PATH"' >> ~/.bashrc
+echo 'export PATH="$HOME/.local/bin:$PYENV_ROOT/bin:$HOME/.tfenv/bin:$PATH"' >> $HOME/.bashrc
+echo 'export PATH="$HOME/.local/bin:$PYENV_ROOT/bin:$HOME/.tfenv/bin:$PATH"' >> $HOME/.zshrc
 
 
 # Set XDG_CONFIG_HOME env var
 echo 'export XDG_CONFIG_HOME="$HOME/.config"' >> $HOME/.zshrc
 echo 'export XDG_CONFIG_HOME="$HOME/.config"' >> $HOME/.bashrc
-
 
 
 # Symlink nvim config
@@ -151,8 +143,6 @@ sudo usermod -aG docker $USER
 
 # Install python packages using the global pyenv python
 pip install --upgrade pip
-pip install docker-compose pipenv 
-
 
 # Install rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
