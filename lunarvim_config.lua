@@ -81,6 +81,7 @@ lvim.builtin.treesitter.ensure_installed = {
   "css",
   "rust",
   "java",
+  "vimdoc",
   "yaml",
 }
 
@@ -168,7 +169,18 @@ lvim.plugins = {
     --  "folke/trouble.nvim",
     --  cmd = "TroubleToggle",
     --},
-    {"catppuccin/nvim"}
+    {"catppuccin/nvim"},
+    {
+      "zbirenbaum/copilot-cmp",
+      event = "InsertEnter",
+      dependencies = { "zbirenbaum/copilot.lua" },
+      config = function()
+        vim.defer_fn(function()
+          require("copilot").setup() -- https://github.com/zbirenbaum/copilot.lua/blob/master/README.md#setup-and-configuration
+          require("copilot_cmp").setup() -- https://github.com/zbirenbaum/copilot-cmp/blob/master/README.md#configuration
+        end, 100)
+      end,
+    },
 }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
