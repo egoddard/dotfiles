@@ -64,9 +64,9 @@ ln -s $HOME/dotfiles/tmux.conf.local $HOME/.tmux.conf.local
 
 
 # install custom fonts 
-wget 'https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/FiraCode/Regular/complete/Fura%20Code%20Regular%20Nerd%20Font%20Complete%20Mono.otf'
+wget 'https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/FiraCode/Regular/FiraCodeNerdFontMono-Regular.ttf'
 mkdir -p $HOME/.local/share/fonts
-mv 'Fura Code Regular Nerd Font Complete Mono.otf' $HOME/.local/share/fonts/
+mv 'FiraCodeNerdFontMono-Regular.ttf' $HOME/.local/share/fonts/
 fc-cache -vf $HOME/.local/share/fonts
 
 
@@ -94,11 +94,7 @@ git clone --depth=1 https://github.com/tfutils/tfenv.git $HOME/.tfenv
 
 
 # Instal nvm and node + npm
-export NVM_DIR="$HOME/.nvm" && (
-  git clone https://github.com/nvm-sh/nvm.git "$NVM_DIR"
-  cd "$NVM_DIR"
-  ) && \. "$NVM_DIR/nvm.sh"
-  git checkout `git describe --abbrev=0 --tags --match "v[0-9]*" $(git rev-list --tags --max-count=1)`
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
 
 echo 'export NVM_DIR="$HOME/.nvm"' >> $HOME/.bashrc
 echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $HOME/.bashrc # This loads nvm
