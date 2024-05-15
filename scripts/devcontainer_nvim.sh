@@ -1,15 +1,23 @@
 #!/bin/bash
 
+if test -f "${HOME}/.dotfiles_installed"; then
+	echo "Install script has already run, exiting"
+	exit 0
+fi
+
+if arch | grep -q "aarch64"; then
+	ARCH='arm64'
+else
+	ARCH='x86_64'
+fi
+
 sudo apt update && sudo apt install -y ninja-build gettext cmake unzip curl build-essential tmux stow ripgrep fzf
 sudo apt remove -y neovim
 
 cd
 git clone https://github.com/neovim/neovim && cd neovim && git checkout stable
 make CMAKE_BUILD_TYPE=Release
-
 sudo make install
-curl -LO https://github.com/BurntSushi/ripgrep/releases/download/13.0.0/ripgrep_13.0.0_amd64.deb
-sudo dpkg -i ripgrep_13.0.0_amd64.deb
 
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
@@ -26,9 +34,6 @@ echo "alias gb='git branch --sort=-committerdate'" >>~/.zshrc
 echo "alias gb='git branch --sort=-committerdate'" >>~/.bashrc
 echo "alias tree='tree --dirsfirst -I __pycache__ -I node_modules'" >>~/.zshrc
 
-echo "export STARSHIP_CONFIG=$HOME/dotfiles/starship.toml" >>~/.zshrc
-echo "export STARSHIP_CONFIG=$HOME/dotfiles/starship.toml" >>~/.bashrc
-
 sudo unlink /etc/localtime
 sudo ln -s /usr/share/zoneinfo/America/Chicago /etc/localtime
 
@@ -37,5 +42,13 @@ curl -sSfo op.zip \
 	sudo unzip -od /usr/local/bin/ op.zip &&
 	rm op.zip
 
+LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
+curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_${ARCH}.tar.gz"
+tar xf lazygit.tar.gz lazygit
+sudo install lazygit /usr/local/bin
+
 cd ~/dotfiles
-stow nvim tmux
+stow nvim tmux starship
+
+# Write file to home dir that we can check at next startup to see if this script needs to run
+touch ~/.dotfiles_installed
