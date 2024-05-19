@@ -48,7 +48,9 @@ tar xf lazygit.tar.gz lazygit
 sudo install lazygit /usr/local/bin
 
 cd ~/dotfiles
-stow nvim tmux starship
+stow tmux starship
+
+git clone https://github.com/egoddard/kickstart.nvim ~/.config/nvim
 
 # Write file to home dir that we can check at next startup to see if this script needs to run
 touch ~/.dotfiles_installed

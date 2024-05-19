@@ -1,6 +1,7 @@
 {
   "extras": [
     "lazyvim.plugins.extras.dap.core",
+    "lazyvim.plugins.extras.test.core",
     "lazyvim.plugins.extras.dap.nlua",
     "lazyvim.plugins.extras.editor.mini-diff",
     "lazyvim.plugins.extras.lang.docker",
@@ -9,11 +10,10 @@
     "lazyvim.plugins.extras.lang.terraform",
     "lazyvim.plugins.extras.lang.typescript",
     "lazyvim.plugins.extras.lang.yaml",
-    "lazyvim.plugins.extras.test.core",
     "lazyvim.plugins.extras.util.gitui"
   ],
   "news": {
-    "NEWS.md": "3314"
+    "NEWS.md": "4828"
   },
   "version": 3
 }
