@@ -6,7 +6,7 @@ if test -f "${HOME}/.dotfiles_installed"; then
 fi
 
 if [ "$UID" -eq 0 ]; then
-	source ./devcontainer_nvim_root.sh
+	source $HOME/dotfiles/scripts/devcontainer_nvim_root.sh
 else
-	source ./devcontainer_nvim.sh
+	source $HOME/dotfiles/scripts/devcontainer_nvim.sh
 fi
