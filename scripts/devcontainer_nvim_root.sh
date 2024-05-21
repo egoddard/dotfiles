@@ -15,7 +15,7 @@ apt update && apt install -y ninja-build gettext cmake unzip curl build-essentia
 apt remove -y neovim
 
 cd
-git clone https://github.com/neovim/neovim && cd neovim && git checkout stable
+git clone https://github.com/neovim/neovim && cd neovim && git checkout v0.9.5
 make CMAKE_BUILD_TYPE=Release
 make install
 
