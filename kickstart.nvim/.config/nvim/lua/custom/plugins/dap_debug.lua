@@ -23,7 +23,7 @@ return {
     'theHamsta/nvim-dap-virtual-text',
 
     -- Add your own debuggers here
-    --'leoluz/nvim-dap-go',
+    'leoluz/nvim-dap-go',
     'mfussenegger/nvim-dap-python',
   },
   config = function()
@@ -103,7 +103,7 @@ return {
     end
 
     -- Install golang specific config
-    --require('dap-go').setup()
+    require('dap-go').setup()
     -- Install python-specific config
     require('dap-python').setup '~/.virtualenvs/debugpy/bin/python'
   end,
