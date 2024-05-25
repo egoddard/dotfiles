@@ -15,10 +15,27 @@ return {
   },
   opts = {
     filesystem = {
-      window = {
-        mappings = {
-          ['\\'] = 'close_window',
+      filtered_items = {
+        never_show = {
+          '.cache',
+          '.git',
+          'node_modules',
+          '__pycache__',
         },
+        always_show = {
+          '.config',
+          '.envrc',
+          '.env',
+          '.github',
+        },
+      },
+    },
+    window = {
+      position = 'right',
+      mappings = {
+        ['\\'] = 'close_window',
+        ['o'] = 'open',
+        ['h'] = 'close_node',
       },
     },
   },
