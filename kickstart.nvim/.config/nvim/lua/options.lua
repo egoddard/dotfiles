@@ -2,6 +2,8 @@
 -- NOTE: You can change these options as you wish!
 --  For more options, you can see `:help option-list`
 --
+-- disable wrapping lines
+vim.opt.wrap = false
 
 -- Make line numbers default
 vim.opt.number = true
