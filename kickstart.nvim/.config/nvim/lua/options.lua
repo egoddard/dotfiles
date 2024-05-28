@@ -65,3 +65,6 @@ vim.opt.scrolloff = 10
 vim.opt.laststatus = 3
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
+--
+-- Configure python support
+vim.g.python3_host_prog = vim.fn.expand '~' .. '/.virtualenvs/py3nvim/bin/python'
