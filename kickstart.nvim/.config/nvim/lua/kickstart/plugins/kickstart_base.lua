@@ -192,6 +192,21 @@ return {
       vim.keymap.set('n', '<leader>sn', function()
         builtin.find_files { cwd = vim.fn.stdpath 'config' }
       end, { desc = '[S]earch [N]eovim files' })
+
+      vim.keymap.set({ 'n', 'v' }, '<leader>ad', function()
+        local actions = require 'CopilotChat.actions'
+        local help = actions.help_actions()
+        if not help then
+          print 'No diagnostics found on the current line'
+          return
+        end
+        require('CopilotChat.integrations.telescope').pick(help)
+      end, { desc = 'Diagnostic Help (Copilot Chat)' })
+
+      vim.keymap.set({ 'n', 'v' }, '<leader>ap', function()
+        local actions = require 'CopilotChat.actions'
+        require('CopilotChat.integrations.telescope').pick(actions.prompt_actions())
+      end, { desc = 'Prompt Actions (Copilot Chat)' })
     end,
   },
 

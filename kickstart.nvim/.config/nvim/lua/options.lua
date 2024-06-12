@@ -63,6 +63,7 @@ vim.opt.scrolloff = 10
 
 -- Enable a global status line instead of one status line per buffer
 vim.opt.laststatus = 3
+vim.opt.splitkeep = 'screen'
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 --
