@@ -1,16 +1,42 @@
+local dark_theme = "kanagawa"
+local light_theme = "zenbones"
+
+-- Switch colorscheme based on the background option
+vim.api.nvim_create_autocmd("OptionSet", {
+  pattern = "background",
+  callback = function()
+    if vim.o.background == "dark" then
+      vim.cmd("colorscheme " .. dark_theme)
+    else
+      vim.cmd("colorscheme " .. light_theme)
+    end
+  end,
+})
+
 return {
   {
-    "catppuccin/nvim",
-    lazy = true,
-    name = "catppuccin",
+    -- follows the system theme
+    "f-person/auto-dark-mode.nvim",
+    opts = {
+      update_interval = 1000,
+      set_dark_mode = function()
+        vim.api.nvim_set_option_value("background", "dark", {})
+        vim.cmd("colorscheme " .. dark_theme)
+      end,
+      set_light_mode = function()
+        vim.api.nvim_set_option_value("background", "light", {})
+        vim.cmd("colorscheme " .. light_theme)
+      end,
+    },
   },
-
-  -- Configure LazyVim to load catpuccin
+  { import = "plugins.colors.catppuccin" },
+  { import = "plugins.colors.kanagawa" },
+  { import = "plugins.colors.tokyonight" },
+  { import = "plugins.colors.zenbones" },
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "catppuccin",
-      style = "mocha",
+      colorscheme = dark_theme,
     },
   },
 }
