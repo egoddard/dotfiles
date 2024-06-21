@@ -1,10 +1,29 @@
 return {
   {
-    "hrsh7th/nvim-cmp",
+    "nvim-cmp",
+    dependencies = {
+      {
+        "zbirenbaum/copilot-cmp",
+        dependencies = { "zbirenbaum/copilot.lua" },
+        opts = {},
+        config = function(_, opts)
+          local copilot_cmp = require("copilot_cmp")
+          copilot_cmp.setup(opts)
+          -- attach cmp source whenever copilot attaches
+          -- fixes lazy-loading issues with the copilot cmp source
+          LazyVim.lsp.on_attach(function(client)
+            copilot_cmp._on_insert_enter({})
+          end, "copilot")
+        end,
+      },
+    },
+    ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
-      local cmp = require("cmp")
-      opts.mapping["<CR>"] = nil
-      opts.mapping["<C-y>"] = cmp.mapping.confirm({ select = true })
+      table.insert(opts.sources, 1, {
+        name = "copilot",
+        group_index = 1,
+        priority = 100,
+      })
     end,
   },
 }

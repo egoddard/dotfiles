@@ -1,89 +1,39 @@
-local icons = require("lazyvim.config").icons
-
 return {
-  "nvim-lualine/lualine.nvim",
-  dependencies = {
-    "AndreM222/copilot-lualine",
-  },
-  opts = {
-    options = {
-      component_separators = "",
-      -- slants
-      section_separators = { left = "", right = "" },
-      -- bubbles
-      -- section_separators = { left = "", right = "" },
-    },
-    sections = {
-      lualine_a = { "mode" },
-      lualine_b = { "branch" },
-      -- lualine_c = {},
-      lualine_x = {
-          -- stylua: ignore
-          {
-            function() return require("noice").api.status.command.get() end,
-            cond = function() return package.loaded["noice"] and require("noice").api.status.command.has() end,
-            color = LazyVim.ui.fg("Statement"),
-          },
-          -- stylua: ignore
-          {
-            function() return require("noice").api.status.mode.get() end,
-            cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
-            color = LazyVim.ui.fg("Constant"),
-          },
-          -- stylua: ignore
-          {
-            function() return "  " .. require("dap").status() end,
-            cond = function () return package.loaded["dap"] and require("dap").status() ~= "" end,
-            color = LazyVim.ui.fg("Debug"),
-          },
-        {
-          require("lazy.status").updates,
-          cond = require("lazy.status").has_updates,
-          color = LazyVim.ui.fg("Special"),
-        },
-        {
-          "diagnostics",
-          symbols = {
-            error = icons.diagnostics.Error,
-            warn = icons.diagnostics.Warn,
-            info = icons.diagnostics.Info,
-            hint = icons.diagnostics.Hint,
-          },
-        },
-        {
-          "diff",
-          symbols = {
-            added = icons.git.added,
-            modified = icons.git.modified,
-            removed = icons.git.removed,
-          },
-          source = function()
-            local gitsigns = vim.b.gitsigns_status_dict
-            if gitsigns then
-              return {
-                added = gitsigns.added,
-                modified = gitsigns.changed,
-                removed = gitsigns.removed,
-              }
-            end
-          end,
-        },
-      },
-      lualine_y = {
-        -- { "progress", separator = " ", padding = { left = 1, right = 0 } },
-        -- { "location", padding = { left = 0, right = 1 } },
-        -- { "filetype", padding = { left = 1, right = 1 } },
-        "copilot",
-        { "encoding", padding = { left = 1, right = 1 } },
-      },
-      lualine_z = {
-        { "location" },
-        -- function()
-        --   -- use %R for 24hr time
-        --   local value = os.date("%I:%M %p") -- e.g. 01:36 PM
-        --   return " " .. value
-        -- end,
-      },
-    },
+  {
+    "nvim-lualine/lualine.nvim",
+    optional = true,
+    event = "VeryLazy",
+    opts = function(_, opts)
+      local colors = {
+        [""] = LazyVim.ui.fg("Special"),
+        ["Normal"] = LazyVim.ui.fg("Special"),
+        ["Warning"] = LazyVim.ui.fg("DiagnosticError"),
+        ["InProgress"] = LazyVim.ui.fg("DiagnosticWarn"),
+      }
+      table.insert(opts.sections.lualine_x, 2, {
+        function()
+          local icon = LazyVim.config.icons.kinds.Copilot
+          local status = require("copilot.api").status.data
+          return icon .. (status.message or "")
+        end,
+        cond = function()
+          if not package.loaded["copilot"] then
+            return
+          end
+          local ok, clients = pcall(LazyVim.lsp.get_clients, { name = "copilot", bufnr = 0 })
+          if not ok then
+            return false
+          end
+          return ok and #clients > 0
+        end,
+        color = function()
+          if not package.loaded["copilot"] then
+            return
+          end
+          local status = require("copilot.api").status.data
+          return colors[status.status] or colors[""]
+        end,
+      })
+    end,
   },
 }

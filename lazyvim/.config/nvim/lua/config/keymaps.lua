@@ -46,14 +46,31 @@ end, { desc = "Terminal (cwd)" })
 --
 -- lazygit
 set("n", "<leader>gg", function()
-  Util.terminal({ "lazygit" }, { cwd = Util.root(), esc_esc = false, ctrl_hjkl = false })
-end, { desc = "Lazygit (root dir)" })
-
+  LazyVim.lazygit({ cwd = LazyVim.root.git() })
+end, { desc = "Lazygit (Root Dir)" })
 set("n", "<leader>gG", function()
-  Util.terminal({ "lazygit" }, { esc_esc = false, ctrl_hjkl = false })
+  LazyVim.lazygit()
 end, { desc = "Lazygit (cwd)" })
+set("n", "<leader>gb", LazyVim.lazygit.blame_line, { desc = "Git Blame Line" })
+set("n", "<leader>gB", LazyVim.lazygit.browse, { desc = "Git Browse" })
+
+set("n", "<leader>gf", function()
+  local git_path = vim.api.nvim_buf_get_name(0)
+  LazyVim.lazygit({ args = { "-f", vim.trim(git_path) } })
+end, { desc = "Lazygit Current File History" })
+
+set("n", "<leader>gl", function()
+  LazyVim.lazygit({ args = { "log" }, cwd = LazyVim.root.git() })
+end, { desc = "Lazygit Log" })
+set("n", "<leader>gL", function()
+  LazyVim.lazygit({ args = { "log" } })
+end, { desc = "Lazygit Log (cwd)" })
 
 -- lazydocker
 set("n", "<leader>dd", function()
   Util.terminal({ "lazydocker" }, { cwd = Util.root(), esc_esc = false, ctrl_hjkl = false })
 end, { desc = "LazyDocker" })
+
+-- Disable lazyvim move lines bindings as they dont work well with my moonlander mappings
+vim.keymap.del({ "n", "i", "v" }, "<A-j>")
+vim.keymap.del({ "n", "i", "v" }, "<A-k>")
