@@ -124,8 +124,8 @@ export NVM_DIR="$HOME/.config/nvm"
 # Add go to path
 export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin
 
-if [[ -f ~/.strat_functions ]]; then
-  source ~/.strat_functions
+if [[ -f ~/.custom_shell_functions.sh ]]; then
+  source ~/.custom_shell_functions.sh
 fi
 
 eval "$(fzf --zsh)"
