@@ -11,7 +11,7 @@ else
 	ARCH='x86_64'
 fi
 
-apt update && apt install -y ninja-build gettext cmake unzip curl build-essential tmux stow ripgrep fzf
+apt update && apt install -y ninja-build gettext cmake unzip curl build-essential tmux stow ripgrep fzf git
 apt remove -y neovim
 
 cd
