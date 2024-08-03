@@ -124,6 +124,14 @@ export NVM_DIR="$HOME/.config/nvm"
 # Add go to path
 export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin
 
+alias ll='eza --long --git -a'
+alias cat='bat'
+alias less='bat'
+
+batdiff() {
+    git diff --name-only --relative --diff-filter=d | xargs bat --diff
+}
+
 if [[ -f ~/.custom_shell_functions.sh ]]; then
   source ~/.custom_shell_functions.sh
 fi
