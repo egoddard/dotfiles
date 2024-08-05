@@ -127,6 +127,7 @@ export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin
 alias ll='eza --long --git -a'
 alias cat='bat'
 alias less='bat'
+alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
 
 batdiff() {
     git diff --name-only --relative --diff-filter=d | xargs bat --diff
