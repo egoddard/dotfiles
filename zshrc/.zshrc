@@ -124,7 +124,8 @@ export NVM_DIR="$HOME/.config/nvm"
 # Add go to path
 export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin
 
-alias ll='eza --long --git -a'
+alias ll='eza --long --git -aho --no-permissions'
+alias tree='eza --long --git -ahoT --no-permissions'
 alias cat='bat'
 alias less='bat'
 alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
