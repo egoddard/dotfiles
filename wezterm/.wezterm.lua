@@ -3,7 +3,7 @@ local wezterm = require("wezterm")
 function scheme_for_appearance(appearance)
 	if appearance:find("Dark") then
 		--    return 'Catppuccin Dark Macchiato'
-		return "Kanagawa (Gogh)"
+		return "Tokyo Night"
 	else
 		--    return 'Catppuccin Latte'
 		return "zenbones"
