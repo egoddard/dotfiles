@@ -20,6 +20,7 @@ $nodejs\
 $pulumi\
 $python\
 ${custom.terraform-version}\
+${custom.terraform-workspace}\
 $rlang\
 $rust\
 $memory_usage\
@@ -46,8 +47,14 @@ format = '[\[$symbol($output)\] ](bold blue)'
 [custom.terraform-version]
 command = 'cat .terraform-version'
 format = '[via $symbol($output) ](bold blue)'
-files = ['.terraform-version']
+detect_files = [".terraform-version"]
 symbol = "💠"
+
+[custom.terraform-workspace]
+command = 'cat .terraform/environment'
+format = '[\(($output)\) ](bold blue)'
+detect_folders = [".terraform"]
+detect_files = [".terraform/environment"]
 
 [character]
 success_symbol = "[➡](bold fg:#abd9e9)"
@@ -73,7 +80,7 @@ deleted = "[⌫:${count} ](bold fg:#d53e4f)"
 format = "$all_status$ahead_behind"
 
 [aws]
-format ='on [$symbol($profile )(\[$duration\] )]($style)'
+format = 'on [$symbol($profile )(\[$duration\] )]($style)'
 
 [time]
 disabled = true
