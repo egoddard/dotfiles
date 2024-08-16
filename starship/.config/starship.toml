@@ -46,7 +46,7 @@ format = '[\[$symbol($output)\] ](bold blue)'
 
 [custom.terraform-version]
 command = 'cat .terraform-version'
-format = '[via $symbol($output) ](bold blue)'
+format = '[$symbol($output) ](bold blue)'
 detect_files = [".terraform-version"]
 symbol = "💠"
 
