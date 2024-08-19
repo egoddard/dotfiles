@@ -1,21 +1,21 @@
 #!/bin/bash
 
 if test -f "${HOME}/.dotfiles_installed"; then
-	echo "Install script has already run, exiting"
-	exit 0
+    echo "Install script has already run, exiting"
+    exit 0
 fi
 
 if arch | grep -q "aarch64"; then
-	ARCH='arm64'
+    ARCH='arm64'
 else
-	ARCH='x86_64'
+    ARCH='x86_64'
 fi
 
 sudo apt update && sudo apt install -y ninja-build gettext cmake unzip curl build-essential tmux stow ripgrep fzf
 sudo apt remove -y neovim
 
 cd
-git clone https://github.com/neovim/neovim && cd neovim && git checkout v0.9.5
+git clone https://github.com/neovim/neovim && cd neovim && git checkout v0.10.1
 make CMAKE_BUILD_TYPE=Release
 sudo make install
 
@@ -38,9 +38,9 @@ sudo unlink /etc/localtime
 sudo ln -s /usr/share/zoneinfo/America/Chicago /etc/localtime
 
 curl -sSfo op.zip \
-	https://cache.agilebits.com/dist/1P/op2/pkg/v2.27.0/op_linux_arm64_v2.27.0.zip &&
-	sudo unzip -od /usr/local/bin/ op.zip &&
-	rm op.zip
+    https://cache.agilebits.com/dist/1P/op2/pkg/v2.27.0/op_linux_arm64_v2.27.0.zip &&
+    sudo unzip -od /usr/local/bin/ op.zip &&
+    rm op.zip
 
 LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
 curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_${ARCH}.tar.gz"
