@@ -25,5 +25,6 @@ config.color_schemes = {
 config.font = wezterm.font("Fira Code")
 config.font_size = 13
 config.color_scheme = scheme_for_appearance(wezterm.gui.get_appearance())
+config.audible_bell = "Disabled"
 
 return config
