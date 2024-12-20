@@ -6,6 +6,11 @@ return {
   ---@type Config
   opts = {
     lualine_bold = true,
+    transparent = true,
+    styles = {
+      sidebars = "transparent",
+      floats = "transparent",
+    },
     --- You can override specific color groups to use other groups or a hex color
     --- function will be called with a ColorScheme table
     on_colors = function(colors)
