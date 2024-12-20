@@ -132,6 +132,7 @@ export NVM_DIR="$HOME/.config/nvm"
 # Add go to path
 export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin
 
+alias lg='lazygit'
 alias ll='eza --long --git -aho --no-permissions'
 alias tree='eza --long --git -ahoT --no-permissions'
 alias cat='bat'
