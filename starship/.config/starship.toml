@@ -57,7 +57,7 @@ detect_folders = [".terraform"]
 detect_files = [".terraform/environment"]
 
 [character]
-success_symbol = "[➡](bold fg:#abd9e9)"
+success_symbol = "[=>](bold fg:#abd9e9)"
 error_symbol = "[➡](bold fg:#ca0020)"
 vicmd_symbol = "[𝍌](bold fg:#ffffbf)"
 
