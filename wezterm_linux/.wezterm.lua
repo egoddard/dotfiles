@@ -1,12 +1,16 @@
 local wezterm = require("wezterm")
 
+-- Install Everforest theme with:
+-- mkdir -p $HOME/.config/wezterm/ && git clone https://github.com/frdwin/Everforest-Wezterm $HOME/.config/wezterm/colors
 function scheme_for_appearance(appearance)
 	if appearance:find("Dark") then
 		--    return 'Catppuccin Dark Macchiato'
-		return "Tokyo Night"
+		-- return "Tokyo Night"
+		return "Everforest Dark (Hard)"
 	else
 		--    return 'Catppuccin Latte'
-		return "zenbones"
+		-- return "zenbones"
+		return "Everforest Light (Medium)"
 	end
 end
 
@@ -38,6 +42,7 @@ config.window_frame = {
 	button_hover_fg = "#ffffff",
 	button_hover_bg = "#3b3052",
 }
+color_scheme_dirs = { "~/.config/wezterm/colors" }
 
 config.font = wezterm.font("FiraCode Nerd Font")
 config.font_size = 11

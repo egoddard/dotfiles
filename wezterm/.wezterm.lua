@@ -3,10 +3,12 @@ local wezterm = require("wezterm")
 function scheme_for_appearance(appearance)
 	if appearance:find("Dark") then
 		--    return 'Catppuccin Dark Macchiato'
-		return "Tokyo Night"
+		-- return "Tokyo Night"
+		return "Everforest Dark (Hard)"
 	else
 		--    return 'Catppuccin Latte'
-		return "zenbones"
+		-- return "zenbones"
+		return "Everforest Light (Medium)"
 	end
 end
 
@@ -21,7 +23,7 @@ config.color_schemes = {
 	["Catppuccin Dark Mocha"] = custom_catppuccin_mocha,
 	["Catppuccin Dark Macchiato"] = custom_catppuccin_macchiato,
 }
-
+color_scheme_dirs = { "~/.config/wezterm/colors" }
 config.font = wezterm.font("Fira Code")
 config.font_size = 13
 config.color_scheme = scheme_for_appearance(wezterm.gui.get_appearance())
