@@ -1,4 +1,4 @@
-local dark_theme = "everforest"
+local dark_theme = "night-owl"
 local light_theme = "zenbones"
 
 -- Switch colorscheme based on the background option
@@ -34,6 +34,7 @@ return {
   { import = "plugins.colors.tokyonight" },
   { import = "plugins.colors.zenbones" },
   { import = "plugins.colors.everforest" },
+  { import = "plugins.colors.nightowl" },
   {
     "LazyVim/LazyVim",
     opts = {

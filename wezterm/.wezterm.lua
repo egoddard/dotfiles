@@ -4,7 +4,8 @@ function scheme_for_appearance(appearance)
 	if appearance:find("Dark") then
 		--    return 'Catppuccin Dark Macchiato'
 		-- return "Tokyo Night"
-		return "Everforest Dark (Hard)"
+		--return "Everforest Dark (Hard)"
+		return "Night Owl (Gogh)"
 	else
 		--    return 'Catppuccin Latte'
 		-- return "zenbones"
@@ -24,7 +25,7 @@ config.color_schemes = {
 	["Catppuccin Dark Macchiato"] = custom_catppuccin_macchiato,
 }
 color_scheme_dirs = { "~/.config/wezterm/colors" }
-config.font = wezterm.font("Fira Code")
+config.font = wezterm.font_with_fallback({ "FiraCode Nerd Font", "Fira Code" })
 config.font_size = 13
 config.color_scheme = scheme_for_appearance(wezterm.gui.get_appearance())
 config.audible_bell = "Disabled"
