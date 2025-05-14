@@ -1,3 +1,4 @@
-theme = dark:Everforest Dark - Hard,light:GruvboxLightHard
+theme = NightOwlDark
+#theme = dark:NightOwlDark,light:NightOwlLight
 font-size = 10
 # font-family = Fira Code
