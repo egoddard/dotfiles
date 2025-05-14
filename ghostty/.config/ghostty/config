@@ -1,4 +1,4 @@
 theme = NightOwlDark
 #theme = dark:NightOwlDark,light:NightOwlLight
 font-size = 10
-# font-family = Fira Code
+font-family = Monaspace Argon

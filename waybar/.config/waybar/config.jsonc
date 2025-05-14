@@ -8,11 +8,10 @@
     // Choose the order of the modules
     "modules-left": [
         "hyprland/workspaces",
-        "hyprland/window",
         "custom/media"
     ],
     "modules-center": [
-        "clock"
+        "hyprland/window"
     ],
     "modules-right": [
         "mpd",
@@ -23,12 +22,13 @@
         //"power-profiles-daemon",
         //"cpu",
         //"memory",
-        "temperature",
+        //"temperature",
         "backlight",
         "keyboard-state",
         "battery",
         //"battery#bat2",
         "tray",
+        "clock",
         "custom/power"
     ],
     //Modules configuration
@@ -36,16 +36,16 @@
         "disable-scroll": true,
         "all-outputs": true,
         "warp-on-scroll": false,
-        "format": "{name}: {icon}",
+        "format": "{name}",
         "format-icons": {
             //    "1": "",
             //    "2": "",
             //    "3": "",
             //    "4": "",
             //    "5": "",
-            "urgent": "",
-            "active": "",
-            "default": ""
+            //"urgent": "",
+            //"active": "",
+            //"default": ""
         }
     },
     "keyboard-state": {
@@ -97,7 +97,7 @@
         "tooltip-format-disconnected": "MPD (disconnected)"
     },
     "idle_inhibitor": {
-        "format": "{icon}",
+        "format": "<span size='15000'>{icon}</span>",
         "format-icons": {
             "activated": "",
             "deactivated": ""
@@ -109,7 +109,7 @@
     },
     "clock": {
         // "timezone": "America/New_York",
-        "format": "{:%I:%M %p %a, %b %e }",
+        "format": "{:%a, %b %e %I:%M %p}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "format-alt": "{:%Y-%m-%d}"
     },
@@ -134,7 +134,8 @@
     },
     "backlight": {
         // "device": "acpi_video1",
-        "format": "{percent}% {icon}",
+        "format": "<span size='13000'>{icon}</span>",
+        "tooltip-format": "Brightness: {percent}%",
         "format-icons": [
             "",
             "",
@@ -149,24 +150,24 @@
     },
     "battery": {
         "states": {
-            // "good": 95,
             "warning": 30,
             "critical": 15
         },
-        "format": "{capacity}% {icon}",
-        "format-full": "{capacity}% {icon}",
-        "format-charging": "{capacity}% ",
-        "format-plugged": "{capacity}% ",
-        "format-alt": "{time} {icon}",
-        // "format-good": "", // An empty format will hide the module
-        // "format-full": "",
+        "format": "<span size='13000' foreground='#a6e3a1'>{icon} </span> {capacity}%",
+        "format-warning": "<span size='13000' foreground='#B1E3AD'>{icon} </span> {capacity}%",
+        "format-critical": "<span size='13000' foreground='#E38C8F'>{icon} </span> {capacity}%",
+        "format-charging": "<span size='13000' foreground='#B1E3AD'>󰂅 </span>{capacity}%",
+        "format-plugged": "<span size='13000' foreground='#B1E3AD'>󰂅 </span>{capacity}%",
+        "format-alt": "<span size='13000' foreground='#B1E3AD'>{icon} </span> {time}",
+        "format-full": "<span size='13000' foreground='#B1E3AD'>{icon} </span>{capacity}%",
         "format-icons": [
-            "",
-            "",
-            "",
-            "",
-            ""
-        ]
+            "󰁺",
+            "󰁻",
+            "󰁾",
+            "󰂀",
+            "󰁹"
+        ],
+        "tooltip-format": "{time}"
     },
     "battery#bat2": {
         "bat": "BAT2"
@@ -184,21 +185,21 @@
     },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "{essid} ",
+        "format-wifi": "<span size='15000'> </span>",
         "format-ethernet": "{ipaddr}/{cidr} ",
-        "tooltip-format": "{signalStrength}%   {ifname} via {gwaddr} ",
+        "tooltip-format": " {signalStrength}% {essid} {ifname} via {gwaddr} ",
         "format-linked": "{ifname} (No IP) ",
-        "format-disconnected": "Disconnected ⚠"
+        "format-disconnected": "<span size='13000'>󱚼</span>"
         //"format-alt": "{ifname}: {ipaddr}/{cidr}"
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
-        "format": "{volume}% {icon} {format_source}",
+        "format": "{volume}% <span size='15000'>{icon}</span> {format_source}",
         "format-bluetooth": "{volume}% {icon} {format_source}",
         "format-bluetooth-muted": " {icon} {format_source}",
-        "format-muted": " {format_source}",
-        "format-source": "{volume}% ",
-        "format-source-muted": "",
+        "format-muted": "<span size='14000'></span> {format_source}",
+        "format-source": "{volume}% <span size='14000'></span>",
+        "format-source-muted": "<span size='14000'></span>",
         "format-icons": {
             "headphone": "",
             "hands-free": "",
@@ -215,10 +216,10 @@
         "on-click": "pavucontrol"
     },
     "bluetooth": {
-        "format": "󰂯",
+        "format": "<span size='13000'>󰂯</span>",
         "tooltip": true,
         "tooltip-format": "Bluetooth Settings",
-        "on-click": "bluetuith",
+        "on-click": "bluetuith"
     },
     "custom/media": {
         "format": "{icon} {text}",
@@ -233,7 +234,7 @@
         // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
     },
     "custom/power": {
-        "format": "⏻ ",
+        "format": "<span size='14000'>⏻ </span>",
         "tooltip": false,
         "menu": "on-click",
         "menu-file": "$HOME/.config/waybar/power_menu.xml", // Menu file in resources folder
