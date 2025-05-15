@@ -53,8 +53,8 @@ set("n", "<leader>gG", function()
 end, { desc = "Lazygit (cwd)" })
 
 -- Remove keymaps that interfere with git history
-vim.keymap.del({ "n" }, "<leader>gl")
-vim.keymap.del({ "n" }, "<leader>gL")
+--vim.keymap.del({ "n" }, "<leader>gl")
+--vim.keymap.del({ "n" }, "<leader>gL")
 
 set("n", "<leader>gLf", function()
   local git_path = vim.api.nvim_buf_get_name(0)
