@@ -70,7 +70,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git asdf)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -152,3 +152,17 @@ eval "$(fzf --zsh)"
 if [[ -d $HOME/.cargo ]]; then
     . "$HOME/.cargo/env"
 fi
+
+if [[ -f $HOME/.local/bin/asdf ]]; then
+    export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+    fpath=(${ASDF_DIR}/completions $fpath)
+fi
+
+if [[ -d $HOME/.fly ]]; then
+    export FLYCTL_INSTALL="/home/eric/.fly"
+    export PATH="$FLYCTL_INSTALL/bin:$PATH"
+fi
+
+fpath+=~/.zfunc
+autoload -Uz compinit
+zstyle ':completion:*' menu select

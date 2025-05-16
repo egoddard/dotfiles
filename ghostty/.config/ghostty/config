@@ -1,4 +1,4 @@
-theme = NightOwlDark
-#theme = dark:NightOwlDark,light:NightOwlLight
+#theme = NightOwlDark
+theme = dark:NightOwlDark,light:NightOwlLight
 font-size = 10
-font-family = Monaspace Argon
+font-family = Monaspace Argon Frozen
