@@ -7,14 +7,16 @@ return {
       -- add any opts here
       -- for example
       provider = "copilot",
-      claude = {
-        endpoint = "https://api.anthropic.com",
-        model = "claude-3-5-sonnet-20241022", -- your desired model (or use gpt-4o, etc.)
-        timeout = 30000, -- Timeout in milliseconds, increase this for reasoning models
-        temperature = 0,
-        max_completion_tokens = 8192, -- Increase this to include reasoning tokens (for reasoning models)
-        --reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
-      },
+      --providers = {
+      --claude = {
+      --  endpoint = "https://api.anthropic.com",
+      --  model = "claude-3-5-sonnet-20241022", -- your desired model (or use gpt-4o, etc.)
+      --  timeout = 30000, -- Timeout in milliseconds, increase this for reasoning models
+      --  temperature = 0,
+      --  max_completion_tokens = 8192, -- Increase this to include reasoning tokens (for reasoning models)
+      --  --reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
+      --},
+      --},
     },
     -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
     build = "make",
@@ -25,7 +27,7 @@ return {
       "nvim-lua/plenary.nvim",
       "MunifTanjim/nui.nvim",
       --- The below dependencies are optional,
-      "echasnovski/mini.pick", -- for file_selector provider mini.pick
+      "nvim-mini/mini.pick", -- for file_selector provider mini.pick
       --"nvim-telescope/telescope.nvim", -- for file_selector provider telescope
       "hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
       "ibhagwan/fzf-lua", -- for file_selector provider fzf

@@ -73,3 +73,6 @@ end, { desc = "LazyDocker" })
 -- Disable lazyvim move lines bindings as they dont work well with my moonlander mappings
 vim.keymap.del({ "n", "i", "v" }, "<A-j>")
 vim.keymap.del({ "n", "i", "v" }, "<A-k>")
+
+-- Claude Code
+set("n", "<leader>ac", "<cmd>ClaudeCode<CR>", { desc = "Toggle Claude Code" })
