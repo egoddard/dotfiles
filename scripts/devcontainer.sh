@@ -11,7 +11,9 @@ echo "export STARSHIP_CONFIG=$HOME/dotfiles/starship.toml" >>~/.bashrc
 sudo unlink /etc/localtime
 sudo ln -s /usr/share/zoneinfo/America/Chicago /etc/localtime
 
+ARCH="$(uname -m)"
+OP_VERSION="v$(curl https://app-updates.agilebits.com/check/1/0/CLI2/en/2.0.0/N -s | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+')"
 curl -sSfo op.zip \
-	https://cache.agilebits.com/dist/1P/op2/pkg/v2.27.0/op_linux_arm64_v2.27.0.zip &&
-	sudo unzip -od /usr/local/bin/ op.zip &&
-	rm op.zip
+    https://cache.agilebits.com/dist/1P/op2/pkg/"$OP_VERSION"/op_linux_"$ARCH"_"$OP_VERSION".zip &&
+    unzip -od /usr/local/bin/ op.zip &&
+    rm op.zip
