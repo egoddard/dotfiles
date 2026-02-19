@@ -12,6 +12,12 @@ sudo unlink /etc/localtime
 sudo ln -s /usr/share/zoneinfo/America/Chicago /etc/localtime
 
 ARCH="$(uname -m)"
+if [[ "$ARCH" == "arm64" || "$ARCH" == "aarch64" ]]; then
+    ARCH="arm64"
+else
+    ARCH="amd64"
+fi
+
 OP_VERSION="v$(curl https://app-updates.agilebits.com/check/1/0/CLI2/en/2.0.0/N -s | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+')"
 curl -sSfo op.zip \
     https://cache.agilebits.com/dist/1P/op2/pkg/"$OP_VERSION"/op_linux_"$ARCH"_"$OP_VERSION".zip &&
