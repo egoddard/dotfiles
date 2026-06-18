@@ -1,5 +1,7 @@
 return {
   "nvim-treesitter/nvim-treesitter",
+  lazy = false,
+  build = ":TSUpdate",
   opts = function(_, opts)
     local function add(lang)
       if type(opts.ensure_installed) == "table" then
