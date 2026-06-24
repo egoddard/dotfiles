@@ -132,6 +132,11 @@ export NVM_DIR="$HOME/.config/nvm"
 # Add go to path
 export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin
 
+# Add PATH="/opt/homebrew/opt/grep/libexec/gnubin:$PATH" to path
+if [[ -d "/opt/homebrew/opt/grep/libexec/gnubin" ]]; then
+    export PATH="/opt/homebrew/opt/grep/libexec/gnubin:$PATH"
+fi
+
 alias lg='lazygit'
 alias ll='eza --long --git -aho --no-permissions'
 alias tree='eza --long --git -ahoT --no-permissions'
@@ -166,3 +171,5 @@ fi
 fpath+=~/.zfunc
 autoload -Uz compinit
 zstyle ':completion:*' menu select
+
+export PGCLIENTENCODING=utf-8
