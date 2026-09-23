@@ -1,5 +1,5 @@
 #theme = NightOwlDark
-theme = dark:NightOwlDark,light:NightOwlLight
+theme = dark:Ethereal,light:NightOwlLight
 font-size = 14
 font-family = Monaspace Argon
 font-feature = "ss01"
