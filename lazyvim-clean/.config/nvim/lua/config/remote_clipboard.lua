@@ -1,9 +1,9 @@
 -- Clipboard for sessions whose yanks may need to reach another machine:
 -- every copy is emitted as OSC 52 (inside tmux this becomes a tmux buffer,
--- rebroadcast to every attached client, local or SSH). Paste prefers the
--- local Wayland clipboard when one is available, so content copied in other
--- apps remains pasteable; without a display, paste is an OSC 52 query that
--- tmux (or the terminal) answers.
+-- rebroadcast to every attached client, local or SSH). Copy and paste also
+-- use the local clipboard (Wayland, or pbcopy/pbpaste on macOS) when one is
+-- available, so content copied in other apps remains pasteable; without one,
+-- paste is an OSC 52 query that tmux (or the terminal) answers.
 local M = {}
 
 local function proc_lines(pid, file)
@@ -50,20 +50,37 @@ function M.setup()
   end
 
   local osc52 = require("vim.ui.clipboard.osc52")
-  local has_wayland = vim.env.WAYLAND_DISPLAY ~= nil
-    and vim.fn.executable("wl-copy") == 1
-    and vim.fn.executable("wl-paste") == 1
+  local local_copy, local_paste
+  if vim.env.WAYLAND_DISPLAY ~= nil and vim.fn.executable("wl-copy") == 1 and vim.fn.executable("wl-paste") == 1 then
+    local_copy = function(register)
+      local cmd = { "wl-copy", "--sensitive", "--type", "text/plain" }
+      if register == "*" then
+        cmd[#cmd + 1] = "--primary"
+      end
+      return cmd
+    end
+    local_paste = function(register)
+      local cmd = { "wl-paste", "--no-newline" }
+      if register == "*" then
+        cmd[#cmd + 1] = "--primary"
+      end
+      return cmd
+    end
+  elseif vim.fn.has("mac") == 1 and vim.fn.executable("pbcopy") == 1 and vim.fn.executable("pbpaste") == 1 then
+    local_copy = function()
+      return { "pbcopy" }
+    end
+    local_paste = function()
+      return { "pbpaste" }
+    end
+  end
 
   local function copy(register)
     local emit = osc52.copy(register)
 
     return function(lines)
-      if has_wayland then
-        local cmd = { "wl-copy", "--sensitive", "--type", "text/plain" }
-        if register == "*" then
-          cmd[#cmd + 1] = "--primary"
-        end
-        vim.fn.system(cmd, lines)
+      if local_copy then
+        vim.fn.system(local_copy(register), lines)
       end
 
       emit(lines)
@@ -71,17 +88,12 @@ function M.setup()
   end
 
   local function paste(register)
-    if not has_wayland then
+    if not local_paste then
       return osc52.paste(register)
     end
 
     return function()
-      local cmd = { "wl-paste", "--no-newline" }
-      if register == "*" then
-        cmd[#cmd + 1] = "--primary"
-      end
-
-      local lines = vim.fn.systemlist(cmd, "", 1)
+      local lines = vim.fn.systemlist(local_paste(register), "", 1)
       return vim.v.shell_error == 0 and lines or {}
     end
   end
